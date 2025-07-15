@@ -29,6 +29,9 @@ pipeline {
       }
     }
     stage('Build and Test') {
+      environment {
+        HOME = '/var/lib/jenkins/workspace/ultimate-cicd'
+      }
       steps {
         sh 'ls -ltr'
         // build the project and create a JAR file
