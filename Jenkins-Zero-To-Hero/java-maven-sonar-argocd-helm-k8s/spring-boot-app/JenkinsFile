@@ -8,15 +8,12 @@ pipeline {
  options {
     skipDefaultCheckout(true)
   }
-
   stages {
     stage('Clean Workspace') {
       steps {
-        // Deletes everything in the current workspace to avoid permission issues
         deleteDir()
       }
-  }
-  stages {
+    }
     stage('Checkout') {
       steps {
         sh 'echo passed'
