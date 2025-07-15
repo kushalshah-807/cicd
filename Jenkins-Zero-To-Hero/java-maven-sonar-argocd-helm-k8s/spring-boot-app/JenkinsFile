@@ -7,13 +7,22 @@ pipeline {
   }
  options {
     skipDefaultCheckout(true)
+    disableConcurrentBuilds()
+    durabilityHint('PERFORMANCE_OPTIMIZED')
+    preserveStashes(buildCount: 2)
   }
   stages {
     stage('Clean Workspace') {
       steps {
+        script {
+          try {
         deleteDir()
+      } catch (e) {
+        echo "Warning: Failed to clean workspace: ${e.message}"
       }
     }
+  }
+}
     stage('Checkout') {
       steps {
         sh 'echo passed'
