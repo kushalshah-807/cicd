@@ -13,9 +13,11 @@ pipeline {
     }
     stage('Build and Test') {
       steps {
-        sh 'ls -ltr'
-        // build the project and create a JAR file
-        sh 'cd Jenkins-Zero-To-Hero/java-maven-sonar-argocd-helm-k8s/spring-boot-app && mvn clean package'
+        withEnv(['JAVA_HOME=/usr/lib/jvm/java-17-openjdk-amd64', 'PATH=/usr/lib/jvm/java-17-openjdk-amd64/bin:$PATH']) {
+          sh 'ls -ltr'
+          // build the project and create a JAR file
+          sh 'cd Jenkins-Zero-To-Hero/java-maven-sonar-argocd-helm-k8s/spring-boot-app && mvn clean package'
+        }
       }
     }
     stage('Static Code Analysis') {
