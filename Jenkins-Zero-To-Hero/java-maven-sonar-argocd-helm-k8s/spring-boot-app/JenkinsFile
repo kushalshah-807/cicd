@@ -5,6 +5,17 @@ pipeline {
       args '--user root -v /var/run/docker.sock:/var/run/docker.sock' // mount Docker socket to access the host's Docker daemon
     }
   }
+ options {
+    skipDefaultCheckout(true)
+  }
+
+  stages {
+    stage('Clean Workspace') {
+      steps {
+        // Deletes everything in the current workspace to avoid permission issues
+        deleteDir()
+      }
+  }
   stages {
     stage('Checkout') {
       steps {
